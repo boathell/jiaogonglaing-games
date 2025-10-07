@@ -1,0 +1,13 @@
+{
+  "name": "jiao-gong-liang",
+  "version": "1.0.0",
+  "description": "交公粮扑克牌游戏",
+  "main": "index.html",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^29.5.0",
+    "jest-environment-jsdom": "^29.5.0"
+  }
+}

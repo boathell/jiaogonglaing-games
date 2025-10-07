@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>交公粮 - 扑克牌游戏</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="game-container">
+        <div class="game-header">
+            <h1>交公粮</h1>
+            <div class="game-controls">
+                <button id="new-game-btn">新游戏</button>
+                <button id="help-btn">帮助</button>
+            </div>
+        </div>
+
+        <div class="game-board">
+            <!-- 电脑玩家区域 -->
+            <div class="player-area computer-player" id="player-1">
+                <div class="player-info">
+                    <span class="player-name">电脑玩家 1</span>
+                    <span class="card-count">0 张牌</span>
+                </div>
+                <div class="player-cards"></div>
+            </div>
+
+            <div class="player-area computer-player" id="player-2">
+                <div class="player-info">
+                    <span class="player-name">电脑玩家 2</span>
+                    <span class="card-count">0 张牌</span>
+                </div>
+                <div class="player-cards"></div>
+            </div>
+
+            <!-- 出牌区域 -->
+            <div class="play-area">
+                <div class="last-play" id="last-play">
+                    <!-- 最后出的牌会显示在这里 -->
+                </div>
+                <div class="game-status" id="game-status">
+                    等待游戏开始...
+                </div>
+            </div>
+
+            <!-- 玩家区域 -->
+            <div class="player-area human-player" id="player-0">
+                <div class="player-info">
+                    <span class="player-name">玩家</span>
+                    <span class="card-count">0 张牌</span>
+                </div>
+                <div class="player-cards" id="player-cards"></div>
+                <div class="player-controls">
+                    <button id="play-btn" disabled>出牌</button>
+                    <button id="pass-btn" disabled>不出</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 游戏提示和消息 -->
+        <div class="game-message" id="game-message"></div>
+    </div>
+
+    <!-- 游戏帮助弹窗 -->
+    <div class="modal" id="help-modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>游戏规则</h2>
+            <div class="rules-content">
+                <h3>基本规则</h3>
+                <p>交公粮是一种三人玩的扑克牌游戏，每人18张牌。</p>
+                <p>玩家可以出单张、对子、三张，但没有顺子、连对、三带一、四带二等组合。</p>
+                <p>每轮由一名玩家先出，其他玩家必须出相同数量且更大的牌，或选择不出。</p>
+                <p>当一轮中其他两名玩家都选择不出时，由最后出牌的玩家继续先出牌。</p>
+                
+                <h3>牌型大小</h3>
+                <p>单张：3 &lt; 4 &lt; 5 &lt; ... &lt; K &lt; A &lt; 2 &lt; 小王 &lt; 大王</p>
+                <p>对子：3 &lt; 4 &lt; 5 &lt; ... &lt; K &lt; A &lt; 2</p>
+                <p>三张：3 &lt; 4 &lt; 5 &lt; ... &lt; K &lt; A &lt; 2</p>
+                
+                <h3>交粮规则</h3>
+                <p>当一名玩家出完所有牌后，剩余两名玩家中手牌最多的为输家。</p>
+                <p>输家需要交出手中最大的一张牌给赢家，赢家需要还给输家一张较小的牌。</p>
+                <p>特殊情况：如果输家有四张同数的牌或大小王，则免交粮。</p>
+                <p>下一局由输家先出牌。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 游戏结束弹窗 -->
+    <div class="modal" id="game-over-modal">
+        <div class="modal-content">
+            <h2 id="game-result">游戏结束</h2>
+            <div id="tribute-info"></div>
+            <button id="next-round-btn">下一局</button>
+        </div>
+    </div>
+
+    <!-- 游戏脚本 -->
+    <script src="js/EventBus.js"></script>
+    <script src="js/models/Card.js"></script>
+    <script src="js/models/Player.js"></script>
+    <script src="js/models/GameState.js"></script>
+    <script src="js/CardManager.js"></script>
+    <script src="js/AIManager.js"></script>
+    <script src="js/UIManager.js"></script>
+    <script src="js/GameEngine.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
