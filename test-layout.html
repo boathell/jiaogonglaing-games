@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>布局测试</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .test-info {
+            background: yellow;
+            padding: 10px;
+            margin: 10px;
+        }
+        .debug-border {
+            border: 2px solid red;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-info">
+        <h3>布局测试页面</h3>
+        <p>这个页面用于测试卡片布局是否正确</p>
+    </div>
+
+    <div class="game-container">
+        <div class="game-board">
+            <!-- 电脑玩家1 -->
+            <div class="player-area computer-player" id="player-1">
+                <div class="player-info">
+                    <span class="player-name">电脑玩家 1</span>
+                    <span class="card-count">17 张牌</span>
+                </div>
+                <div class="player-cards debug-border">
+                    <div class="card">♠3</div>
+                    <div class="card">♥4</div>
+                    <div class="card">♣5</div>
+                    <div class="card">♦6</div>
+                    <div class="card">♠7</div>
+                </div>
+            </div>
+
+            <!-- 电脑玩家2 -->
+            <div class="player-area computer-player" id="player-2">
+                <div class="player-info">
+                    <span class="player-name">电脑玩家 2</span>
+                    <span class="card-count">17 张牌</span>
+                </div>
+                <div class="player-cards debug-border">
+                    <div class="card">♠8</div>
+                    <div class="card">♥9</div>
+                    <div class="card">♣10</div>
+                    <div class="card">♦J</div>
+                    <div class="card">♠Q</div>
+                </div>
+            </div>
+
+            <!-- 出牌区域 -->
+            <div class="play-area">
+                <div class="last-play" id="last-play">
+                    <div class="card">♠A</div>
+                    <div class="card">♥K</div>
+                </div>
+                <div class="game-status" id="game-status">
+                    测试布局...
+                </div>
+            </div>
+
+            <!-- 人类玩家 -->
+            <div class="player-area human-player" id="player-0">
+                <div class="player-info">
+                    <span class="player-name">玩家</span>
+                    <span class="card-count">18 张牌</span>
+                </div>
+                <div class="player-cards debug-border" id="player-cards">
+                    <div class="card">♠3</div>
+                    <div class="card">♥4</div>
+                    <div class="card">♣5</div>
+                    <div class="card">♦6</div>
+                    <div class="card">♠7</div>
+                    <div class="card">♥8</div>
+                    <div class="card">♣9</div>
+                    <div class="card">♦10</div>
+                </div>
+                <div class="player-controls">
+                    <button id="play-btn">出牌</button>
+                    <button id="pass-btn">不出</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="test-info">
+        <h4>调试信息</h4>
+        <p>检查上面的卡片是否水平排列：</p>
+        <ul>
+            <li>电脑玩家的卡片应该有较小的间距（5px）</li>
+            <li>人类玩家的卡片应该有重叠效果（-30px margin）</li>
+            <li>所有卡片应该在同一行内显示</li>
+        </ul>
+    </div>
+</body>
+</html>

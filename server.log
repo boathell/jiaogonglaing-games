@@ -1,112 +1,228 @@
-::1 - - [07/Oct/2025 23:41:52] "GET / HTTP/1.1" 200 -
-::1 - - [07/Oct/2025 23:41:52] "GET /css/style.css HTTP/1.1" 304 -
-::1 - - [07/Oct/2025 23:41:52] "GET /js/UIManager.js HTTP/1.1" 304 -
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/spade_3.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/club_3.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/diamond_3.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/heart_4.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/club_4.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/heart_3.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/spade_4.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/diamond_4.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/spade_5.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/heart_5.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/spade_6.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/heart_6.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/diamond_5.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/club_5.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/club_6.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/diamond_6.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/spade_7.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/heart_7.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/spade_8.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/club_7.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/heart_8.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/diamond_8.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/diamond_7.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/club_8.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/spade_9.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/heart_9.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/club_9.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/diamond_9.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/heart_10.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/spade_10.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/diamond_10.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/club_10.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/spade_J.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/heart_J.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/club_J.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/diamond_J.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/spade_Q.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/heart_Q.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/club_Q.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/diamond_Q.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/spade_K.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/heart_K.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/club_K.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/diamond_K.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/spade_A.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/club_A.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/heart_A.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/diamond_A.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/spade_2.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/heart_2.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/club_2.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] code 404, message File not found
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/joker1.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/diamond_2.png HTTP/1.1" 404 -
-::1 - - [07/Oct/2025 23:41:52] "GET /assets/cards/joker2.png HTTP/1.1" 404 -
-::ffff:127.0.0.1 - - [07/Oct/2025 23:47:53] "GET / HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [08/Oct/2025 00:48:06] "GET / HTTP/1.1" 200 -
+::1 - - [08/Oct/2025 00:48:23] "GET / HTTP/1.1" 200 -
+::1 - - [08/Oct/2025 00:48:23] "GET /css/style-new.css HTTP/1.1" 200 -
+::1 - - [08/Oct/2025 00:48:23] "GET /js/EventBus.js HTTP/1.1" 304 -
+::1 - - [08/Oct/2025 00:48:23] "GET /js/UIManager-new.js HTTP/1.1" 200 -
+::1 - - [08/Oct/2025 00:48:23] "GET /js/main-new.js HTTP/1.1" 200 -
+::1 - - [08/Oct/2025 00:48:23] "GET /js/CardManager.js HTTP/1.1" 304 -
+::1 - - [08/Oct/2025 00:48:23] "GET /js/models/Player.js HTTP/1.1" 304 -
+::1 - - [08/Oct/2025 00:48:23] "GET /js/models/GameState.js HTTP/1.1" 304 -
+::1 - - [08/Oct/2025 00:48:23] "GET /js/models/Card.js HTTP/1.1" 304 -
+::1 - - [08/Oct/2025 00:48:23] "GET /js/GameEngine.js HTTP/1.1" 304 -
+::1 - - [08/Oct/2025 00:48:23] "GET /js/AIManager.js HTTP/1.1" 304 -
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/spade_3.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/club_3.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/heart_4.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/club_4.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/spade_4.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/heart_3.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/diamond_3.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/spade_5.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/spade_6.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/club_5.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/diamond_5.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/diamond_4.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/heart_5.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/diamond_6.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/spade_7.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/club_7.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/heart_7.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/club_6.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/heart_6.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/diamond_7.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/spade_8.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/diamond_8.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/club_8.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/heart_9.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/spade_9.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/club_9.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/diamond_9.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/heart_8.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/heart_10.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/spade_10.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/club_10.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/diamond_10.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/spade_J.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/heart_J.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/club_J.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/diamond_J.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/spade_Q.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/heart_Q.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/club_Q.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/diamond_Q.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/spade_K.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/heart_K.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/club_K.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/diamond_K.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/spade_A.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/heart_A.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/club_A.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/diamond_A.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/spade_2.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/heart_2.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/club_2.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/diamond_2.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/joker1.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:23] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:23] "GET /assets/cards/joker2.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/spade_3.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/heart_3.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/club_3.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/diamond_3.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/heart_4.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/spade_4.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/spade_5.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/diamond_4.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/club_4.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/heart_5.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/club_5.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/diamond_5.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/spade_6.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/heart_6.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/club_6.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/diamond_6.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/spade_7.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/club_7.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/heart_7.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/heart_8.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/spade_8.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/diamond_7.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/club_8.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/diamond_8.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/spade_9.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/diamond_9.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/heart_9.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/club_9.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/spade_10.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/heart_10.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/club_10.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/diamond_10.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/spade_J.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/heart_J.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/diamond_J.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/club_J.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/spade_Q.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/heart_Q.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/club_Q.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/diamond_Q.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/spade_K.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/heart_K.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/club_K.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/diamond_K.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/spade_A.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/heart_A.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/club_A.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/diamond_A.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/spade_2.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/heart_2.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/club_2.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/diamond_2.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/joker1.png HTTP/1.1" 404 -
+::1 - - [08/Oct/2025 00:48:33] code 404, message File not found
+::1 - - [08/Oct/2025 00:48:33] "GET /assets/cards/joker2.png HTTP/1.1" 404 -

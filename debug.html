@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>交公粮游戏调试</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .debug-info {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 12px;
+            max-width: 300px;
+            z-index: 1000;
+        }
+        .debug-log {
+            max-height: 200px;
+            overflow-y: auto;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="debug-info">
+        <h4>调试信息</h4>
+        <div id="debug-status">加载中...</div>
+        <div id="debug-log" class="debug-log"></div>
+    </div>
+
+    <!-- 复制主游戏界面 -->
+    <div class="game-container">
+        <div class="game-header">
+            <h1>交公粮 - 调试模式</h1>
+            <div class="game-controls">
+                <button id="new-game-btn">新游戏</button>
+                <button id="help-btn">帮助</button>
+                <button id="debug-btn">调试信息</button>
+            </div>
+        </div>
+
+        <div class="game-board">
+            <!-- 电脑玩家区域 -->
+            <div class="player-area computer-player" id="player-1">
+                <div class="player-info">
+                    <span class="player-name">电脑玩家 1</span>
+                    <span class="card-count">0 张牌</span>
+                </div>
+                <div class="player-cards"></div>
+            </div>
+
+            <div class="player-area computer-player" id="player-2">
+                <div class="player-info">
+                    <span class="player-name">电脑玩家 2</span>
+                    <span class="card-count">0 张牌</span>
+                </div>
+                <div class="player-cards"></div>
+            </div>
+
+            <!-- 出牌区域 -->
+            <div class="play-area">
+                <div class="last-play" id="last-play">
+                    <!-- 最后出的牌会显示在这里 -->
+                </div>
+                <div class="game-status" id="game-status">
+                    等待游戏开始...
+                </div>
+            </div>
+
+            <!-- 玩家区域 -->
+            <div class="player-area human-player" id="player-0">
+                <div class="player-info">
+                    <span class="player-name">玩家</span>
+                    <span class="card-count">0 张牌</span>
+                </div>
+                <div class="player-cards" id="player-cards"></div>
+                <div class="player-controls">
+                    <button id="play-btn" disabled>出牌</button>
+                    <button id="pass-btn" disabled>不出</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 游戏提示和消息 -->
+        <div class="game-message" id="game-message"></div>
+    </div>
+
+    <!-- 游戏脚本 -->
+    <script src="js/EventBus.js"></script>
+    <script src="js/models/Card.js"></script>
+    <script src="js/models/Player.js"></script>
+    <script src="js/models/GameState.js"></script>
+    <script src="js/CardManager.js"></script>
+    <script src="js/AIManager.js"></script>
+    <script>
+        // 调试信息记录
+        const debugLog = [];
+        function log(message) {
+            const timestamp = new Date().toLocaleTimeString();
+            debugLog.push(`[${timestamp}] ${message}`);
+            document.getElementById('debug-log').innerHTML = debugLog.join('<br>');
+            console.log(message);
+        }
+
+        // 增强的UIManager用于调试
+        class DebugUIManager extends UIManager {
+            constructor() {
+                super();
+                log('UIManager构造函数执行');
+            }
+
+            renderPlayerCards(player) {
+                log(`开始渲染玩家 ${player.id} (${player.name}) 的手牌，共 ${player.cards.length} 张`);
+                
+                const playerArea = this.playerAreas[player.id];
+                log(`找到玩家区域: ${player.id}, 元素存在: ${!!playerArea}`);
+                
+                if (!playerArea) {
+                    log(`错误: 找不到玩家 ${player.id} 的区域`);
+                    return;
+                }
+                
+                // 清空玩家区域
+                playerArea.innerHTML = '';
+                log('已清空玩家区域');
+                
+                // 排序手牌
+                player.sortCards();
+                log('手牌排序完成');
+                
+                // 渲染手牌
+                for (let i = 0; i < player.cards.length; i++) {
+                    const card = player.cards[i];
+                    log(`创建第 ${i+1} 张牌: ${card.suit} ${card.rank}`);
+                    
+                    try {
+                        const cardElement = this.createCardElement(card);
+                        log(`卡片元素创建成功: ${!!cardElement}`);
+                        
+                        // 如果是人类玩家，添加点击事件
+                        if (player.isHuman) {
+                            cardElement.addEventListener('click', () => {
+                                log(`玩家点击了卡片: ${card.suit} ${card.rank}`);
+                                this.handleCardClick(card, cardElement);
+                            });
+                            
+                            // 如果卡牌被选中，添加选中样式
+                            if (card.selected) {
+                                cardElement.classList.add('selected');
+                                log('卡片被标记为选中状态');
+                            }
+                        } else {
+                            // 如果不是人类玩家，卡牌背面朝上
+                            cardElement.classList.add('card-back');
+                            log('电脑玩家卡片设置为背面');
+                        }
+                        
+                        playerArea.appendChild(cardElement);
+                        log('卡片元素已添加到玩家区域');
+                    } catch (error) {
+                        log(`创建卡片时出错: ${error.message}`);
+                    }
+                }
+                
+                log(`玩家 ${player.name} 的手牌渲染完成`);
+            }
+
+            createCardElement(card) {
+                try {
+                    const cardElement = document.createElement('div');
+                    cardElement.className = 'card';
+                    cardElement.dataset.suit = card.suit;
+                    cardElement.dataset.rank = card.rank;
+                    
+                    // 添加花色和点数
+                    const suitElement = document.createElement('div');
+                    suitElement.className = 'card-suit';
+                    suitElement.textContent = this.getSuitSymbol(card.suit);
+                    
+                    const rankElement = document.createElement('div');
+                    rankElement.className = 'card-rank';
+                    rankElement.textContent = this.getRankText(card.rank);
+                    
+                    cardElement.appendChild(suitElement);
+                    cardElement.appendChild(rankElement);
+                    
+                    log(`创建卡片元素成功: ${card.suit} ${card.rank}`);
+                    return cardElement;
+                } catch (error) {
+                    log(`创建卡片元素出错: ${error.message}`);
+                    throw error;
+                }
+            }
+
+            updateButtonStatus() {
+                const currentPlayer = this.gameEngine.gameState.getCurrentPlayer();
+                const gameState = this.gameEngine.gameState;
+                
+                log(`更新按钮状态 - 当前玩家: ${currentPlayer.name}, 是否人类: ${currentPlayer.isHuman}, 游戏阶段: ${gameState.phase}`);
+                log(`出牌按钮存在: ${!!this.playButton}, 不出按钮存在: ${!!this.passButton}`);
+                
+                // 如果当前玩家是人类玩家且游戏阶段是PLAYING
+                if (currentPlayer.isHuman && gameState.phase === 'PLAYING') {
+                    this.playButton.disabled = false;
+                    log('出牌按钮已启用');
+                    
+                    // 如果有上一次有效出牌，则可以不出
+                    this.passButton.disabled = !gameState.lastValidPlay;
+                    log(`不出按钮状态: ${this.passButton.disabled ? '禁用' : '启用'}`);
+                } else {
+                    this.playButton.disabled = true;
+                    this.passButton.disabled = true;
+                    log('两个按钮都已禁用');
+                }
+            }
+        }
+
+        // 游戏初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            log('DOM加载完成');
+            
+            try {
+                // 创建事件总线
+                const eventBus = new EventBus();
+                log('事件总线创建成功');
+                
+                // 创建游戏引擎
+                const gameEngine = new GameEngine();
+                log('游戏引擎创建成功');
+                
+                // 创建UI管理器（调试版本）
+                const uiManager = new DebugUIManager();
+                log('UI管理器创建成功');
+                
+                // 创建AI管理器
+                const aiManager = new AIManager();
+                log('AI管理器创建成功');
+                
+                // 初始化各个模块
+                aiManager.init(eventBus);
+                log('AI管理器初始化完成');
+                
+                uiManager.init(gameEngine, eventBus);
+                log('UI管理器初始化完成');
+                
+                gameEngine.init(uiManager, aiManager, eventBus);
+                log('游戏引擎初始化完成');
+                
+                // 绑定新游戏按钮事件
+                const newGameBtn = document.getElementById('new-game-btn');
+                if (newGameBtn) {
+                    newGameBtn.addEventListener('click', () => {
+                        log('点击新游戏按钮');
+                        gameEngine.startNewGame();
+                    });
+                } else {
+                    log('错误：找不到新游戏按钮');
+                }
+                
+                // 绑定调试按钮
+                const debugBtn = document.getElementById('debug-btn');
+                if (debugBtn) {
+                    debugBtn.addEventListener('click', () => {
+                        const debugDiv = document.querySelector('.debug-info');
+                        debugDiv.style.display = debugDiv.style.display === 'none' ? 'block' : 'none';
+                    });
+                }
+                
+                // 自动开始第一局游戏
+                log('准备开始新游戏...');
+                setTimeout(() => {
+                    gameEngine.startNewGame();
+                    log('新游戏已开始');
+                }, 100);
+                
+                document.getElementById('debug-status').textContent = '游戏初始化成功';
+                
+            } catch (error) {
+                log(`初始化错误: ${error.message}`);
+                document.getElementById('debug-status').textContent = `错误: ${error.message}`;
+            }
+        });
+    </script>
+</body>
+</html>
