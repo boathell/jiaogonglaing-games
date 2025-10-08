@@ -160,4 +160,13 @@ class CardManager {
             return 0;
         }
     }
+
+    /**
+     * 获取牌型 (兼容方法，用于AIManager)
+     * @param {Card[]} cards - 要判断的牌
+     * @returns {string} - 牌型 (single, pair, triple, invalid)
+     */
+    getCardsType(cards) {
+        return this.identifyCardPattern(cards);
+    }
 }
