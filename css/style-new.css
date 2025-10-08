@@ -360,6 +360,113 @@ body {
     text-align: center;
 }
 
+/* 交公粮显示样式 */
+.tribute-preparation {
+    background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+    color: #856404;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+    border: 2px solid #ffc107;
+    box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+}
+
+.tribute-preparation h3 {
+    color: #856404;
+    margin-bottom: 15px;
+    font-size: 18px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.tribute-players {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    gap: 20px;
+}
+
+.winner-info, .loser-info {
+    flex: 1;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.winner-info {
+    background: linear-gradient(135deg, #d4edda, #c3e6cb);
+    color: #155724;
+    border: 2px solid #28a745;
+}
+
+.loser-info {
+    background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+    color: #721c24;
+    border: 2px solid #dc3545;
+}
+
+.player-name {
+    display: block;
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.role {
+    display: block;
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+.tribute-rules {
+    text-align: left;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+.tribute-rules p {
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #856404;
+}
+
+.tribute-rules ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.tribute-rules li {
+    margin-bottom: 5px;
+    color: #856404;
+}
+
+/* 交公粮消息样式 */
+.game-message.tribute {
+    background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+    color: #856404;
+    border: 2px solid #ffc107;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 10px 0;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+    white-space: pre-line;
+}
+
+.game-message.info {
+    background: linear-gradient(135deg, #d1ecf1, #bee5eb);
+    color: #0c5460;
+    border: 2px solid #17a2b8;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 10px 0;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(23, 162, 184, 0.3);
+}
+
 .close-btn {
     color: #aaa;
     float: right;

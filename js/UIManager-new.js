@@ -39,6 +39,7 @@ class UIManager {
         this.nextRoundButton = document.getElementById('next-round-btn');
         this.helpModal = document.getElementById('help-modal');
         this.closeHelpButton = document.querySelector('.close-btn');
+        this.gameMessage = document.getElementById('game-message');
         
         console.log('UIManager初始化完成 - 所有DOM元素已获取');
     }
@@ -116,6 +117,7 @@ class UIManager {
         this.eventBus.on('player-passed', this.handlePlayerPassed.bind(this));
         this.eventBus.on('turn-changed', this.handleTurnChanged.bind(this));
         this.eventBus.on('game-over', this.handleGameOver.bind(this));
+        this.eventBus.on('tribute-exempted', this.handleTributeExempted.bind(this));
         this.eventBus.on('tribute-completed', this.handleTributeCompleted.bind(this));
         this.eventBus.on('invalid-play', this.handleInvalidPlay.bind(this));
     }
@@ -187,17 +189,70 @@ class UIManager {
             message = `${winner.name} 赢了！`;
         }
         
+        // 清空之前的交公粮信息
+        this.tributeInfo.innerHTML = '';
+        
         if (needTribute) {
             message += `\n${loser.name} 需要交公粮。`;
+            
+            // 显示交公粮准备信息
+            const tributeHtml = `
+                <div class="tribute-preparation">
+                    <h3>🎯 交公粮准备中</h3>
+                    <div class="tribute-players">
+                        <div class="winner-info">
+                            <span class="player-name">🏆 ${winner.name}</span>
+                            <span class="role">赢家</span>
+                        </div>
+                        <div class="loser-info">
+                            <span class="player-name">📤 ${loser.name}</span>
+                            <span class="role">输家（需交最大牌）</span>
+                        </div>
+                    </div>
+                    <div class="tribute-rules">
+                        <p>📋 交公粮规则：</p>
+                        <ul>
+                            <li>输家交出手中最大的一张牌</li>
+                            <li>赢家还回一张较小的牌</li>
+                            <li>如果输家有四张同数牌或大小王，可免交</li>
+                        </ul>
+                    </div>
+                </div>
+            `;
+            this.tributeInfo.innerHTML = tributeHtml;
         }
         
         this.gameResult.textContent = message;
         this.showGameOverModal();
     }
     
+    handleTributeExempted(data) {
+        const { loser, reason } = data;
+        
+        // 显示免交粮信息
+        const message = `${loser.name} 免交公粮！原因：${reason}`;
+        this.showGameMessage(message, 'info');
+        
+        console.log(`交公粮豁免: ${message}`);
+    }
+    
     handleTributeCompleted(data) {
         const { winner, loser, tributeCard, returnCard } = data;
         
+        // 显示详细的交公粮信息
+        const tributeInfo = [];
+        tributeInfo.push(`🎯 交公粮完成！`);
+        tributeInfo.push(`📤 ${loser.name} 交出: ${tributeCard.getDisplayName()}`);
+        tributeInfo.push(`📥 ${winner.name} 获得: ${tributeCard.getDisplayName()}`);
+        tributeInfo.push(`🔄 ${winner.name} 还回: ${returnCard.getDisplayName()}`);
+        tributeInfo.push(`📥 ${loser.name} 获得: ${returnCard.getDisplayName()}`);
+        
+        const message = tributeInfo.join('\n');
+        this.showGameMessage(message, 'tribute');
+        
+        console.log(`交公粮详细信息:\n${message}`);
+        
+        // 更新UI显示
         this.renderPlayerCards(winner);
         this.renderPlayerCards(loser);
         this.updateCardCount(winner);
@@ -411,6 +466,27 @@ class UIManager {
         if (this.gameOverModal) {
             this.gameOverModal.style.display = 'flex';
         }
+    }
+    
+    /**
+     * 显示游戏消息（用于交公粮等重要事件）
+     * @param {string} message - 消息内容
+     * @param {string} type - 消息类型 ('tribute', 'info', etc.)
+     */
+    showGameMessage(message, type = 'info') {
+        if (!this.gameMessage) {
+            console.error('游戏消息元素未找到');
+            return;
+        }
+        
+        this.gameMessage.textContent = message;
+        this.gameMessage.className = 'game-message ' + type;
+        this.gameMessage.style.display = 'block';
+        
+        // 3秒后自动隐藏消息
+        setTimeout(() => {
+            this.gameMessage.style.display = 'none';
+        }, 5000);
     }
     
     hideGameOverModal() {
