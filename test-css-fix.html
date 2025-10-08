@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS修复测试</title>
+    <link rel="stylesheet" href="css/style-new.css">
+    <style>
+        body {
+            background: #2c8d51;
+            padding: 20px;
+        }
+        .test-container {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .result {
+            padding: 10px;
+            margin: 10px 0;
+            background: rgba(255,255,255,0.2);
+            border-radius: 5px;
+        }
+        .success { background: rgba(76, 175, 80, 0.5); }
+        .error { background: rgba(244, 67, 54, 0.5); }
+    </style>
+</head>
+<body>
+    <h1>CSS修复测试 - 真人玩家卡片显示</h1>
+    
+    <div class="test-container">
+        <h3>测试1: 玩家区域卡片显示</h3>
+        <div class="player-area human-player" id="player-0">
+            <div class="player-cards" id="test-cards"></div>
+        </div>
+        <div id="test1-result" class="result">等待测试结果...</div>
+    </div>
+    
+    <div class="test-container">
+        <h3>测试2: 电脑玩家区域卡片显示</h3>
+        <div class="player-area computer-player" id="player-1">
+            <div class="player-cards" id="computer-cards"></div>
+        </div>
+        <div id="test2-result" class="result">等待测试结果...</div>
+    </div>
+
+    <script>
+        function createCardElement(card, isHuman) {
+            const cardElement = document.createElement('div');
+            cardElement.className = 'card';
+            cardElement.dataset.suit = card.suit;
+            cardElement.dataset.rank = card.rank;
+            
+            if (isHuman) {
+                // 人类玩家显示实际牌面
+                const suitElement = document.createElement('div');
+                suitElement.className = 'card-suit';
+                suitElement.textContent = getSuitSymbol(card.suit);
+                
+                const rankElement = document.createElement('div');
+                rankElement.className = 'card-rank';
+                rankElement.textContent = getRankText(card.rank);
+                
+                cardElement.appendChild(suitElement);
+                cardElement.appendChild(rankElement);
+            } else {
+                // 电脑玩家显示背面
+                cardElement.style.background = 'linear-gradient(45deg, #8B4513, #A0522D)';
+                cardElement.innerHTML = '🂠';
+                cardElement.style.fontSize = '40px';
+                cardElement.style.color = 'rgba(255,255,255,0.8)';
+            }
+            
+            return cardElement;
+        }
+        
+        function getSuitSymbol(suit) {
+            switch (suit) {
+                case 'hearts': return '♥';
+                case 'diamonds': return '♦';
+                case 'clubs': return '♣';
+                case 'spades': return '♠';
+                default: return '';
+            }
+        }
+        
+        function getRankText(rank) {
+            switch (rank) {
+                case '1': return 'A';
+                case '11': return 'J';
+                case '12': return 'Q';
+                case '13': return 'K';
+                default: return rank;
+            }
+        }
+        
+        function runTests() {
+            // 测试1: 玩家卡片
+            const playerContainer = document.getElementById('test-cards');
+            const test1Result = document.getElementById('test1-result');
+            
+            playerContainer.innerHTML = '';
+            
+            const testCards = [
+                { suit: 'hearts', rank: '7' },
+                { suit: 'spades', rank: 'K' },
+                { suit: 'diamonds', rank: 'A' }
+            ];
+            
+            testCards.forEach(cardData => {
+                const card = createCardElement(cardData, true);
+                playerContainer.appendChild(card);
+            });
+            
+            // 检查第一张卡片
+            setTimeout(() => {
+                const firstCard = playerContainer.querySelector('.card');
+                const suitEl = firstCard.querySelector('.card-suit');
+                const rankEl = firstCard.querySelector('.card-rank');
+                
+                let success = true;
+                let message = '测试1结果: ';
+                
+                if (!suitEl) {
+                    success = false;
+                    message += '花色元素不存在. ';
+                } else if (!suitEl.textContent) {
+                    success = false;
+                    message += '花色内容为空. ';
+                }
+                
+                if (!rankEl) {
+                    success = false;
+                    message += '数字元素不存在. ';
+                } else if (!rankEl.textContent) {
+                    success = false;
+                    message += '数字内容为空. ';
+                }
+                
+                if (success) {
+                    message = '✅ 真人玩家卡片显示正常！花色和数字元素都存在且有内容。';
+                    test1Result.className = 'result success';
+                } else {
+                    message = '❌ ' + message;
+                    test1Result.className = 'result error';
+                }
+                
+                test1Result.textContent = message;
+            }, 100);
+            
+            // 测试2: 电脑玩家卡片
+            const computerContainer = document.getElementById('computer-cards');
+            const test2Result = document.getElementById('test2-result');
+            
+            computerContainer.innerHTML = '';
+            
+            const computerCard = createCardElement({ suit: 'clubs', rank: '5' }, false);
+            computerContainer.appendChild(computerCard);
+            
+            setTimeout(() => {
+                const cardBack = computerContainer.querySelector('.card');
+                const hasCardSymbol = cardBack.innerHTML.includes('🂠');
+                
+                if (hasCardSymbol) {
+                    test2Result.textContent = '✅ 电脑玩家卡片显示正常！显示背面图案。';
+                    test2Result.className = 'result success';
+                } else {
+                    test2Result.textContent = '❌ 电脑玩家卡片显示异常。';
+                    test2Result.className = 'result error';
+                }
+            }, 100);
+        }
+        
+        document.addEventListener('DOMContentLoaded', runTests);
+    </script>
+</body>
+</html>

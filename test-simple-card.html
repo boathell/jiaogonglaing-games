@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简单卡片测试</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            background: #2c8d51;
+            padding: 20px;
+        }
+        .test-container {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .debug-info {
+            background: yellow;
+            padding: 10px;
+            margin: 10px 0;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <h1>简单卡片显示测试</h1>
+    
+    <div class="test-container">
+        <h3>玩家区域</h3>
+        <div class="player-area human-player" id="player-0">
+            <div class="player-cards" id="test-cards"></div>
+        </div>
+        <div id="debug-info" class="debug-info">等待测试结果...</div>
+    </div>
+
+    <script>
+        function createSimpleCard(suit, rank) {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.dataset.suit = suit;
+            card.dataset.rank = rank;
+            
+            // 创建花色元素
+            const suitElement = document.createElement('div');
+            suitElement.className = 'card-suit';
+            suitElement.textContent = getSuitSymbol(suit);
+            suitElement.style.border = '1px solid blue'; // 调试用边框
+            
+            // 创建数字元素
+            const rankElement = document.createElement('div');
+            rankElement.className = 'card-rank';
+            rankElement.textContent = getRankText(rank);
+            rankElement.style.border = '1px solid green'; // 调试用边框
+            
+            card.appendChild(suitElement);
+            card.appendChild(rankElement);
+            
+            return card;
+        }
+        
+        function getSuitSymbol(suit) {
+            switch (suit) {
+                case 'hearts': return '♥';
+                case 'diamonds': return '♦';
+                case 'clubs': return '♣';
+                case 'spades': return '♠';
+                default: return '';
+            }
+        }
+        
+        function getRankText(rank) {
+            switch (rank) {
+                case '1': return 'A';
+                case '11': return 'J';
+                case '12': return 'Q';
+                case '13': return 'K';
+                default: return rank;
+            }
+        }
+        
+        function runTest() {
+            const container = document.getElementById('test-cards');
+            const debugInfo = document.getElementById('debug-info');
+            
+            // 清空容器
+            container.innerHTML = '';
+            
+            // 创建测试卡片
+            const testCards = [
+                { suit: 'hearts', rank: '7' },
+                { suit: 'spades', rank: 'K' },
+                { suit: 'diamonds', rank: 'A' }
+            ];
+            
+            let debugText = '测试结果:\n\n';
+            
+            testCards.forEach((cardData, index) => {
+                const card = createSimpleCard(cardData.suit, cardData.rank);
+                container.appendChild(card);
+                
+                // 检查创建的卡片
+                const suitEl = card.querySelector('.card-suit');
+                const rankEl = card.querySelector('.card-rank');
+                
+                debugText += `卡片 ${index + 1} (${cardData.suit} ${cardData.rank}):\n`;
+                debugText += `  - 花色元素: ${suitEl ? '存在' : '不存在'}\n`;
+                debugText += `  - 数字元素: ${rankEl ? '存在' : '不存在'}\n`;
+                
+                if (suitEl) {
+                    debugText += `  - 花色内容: "${suitEl.textContent}"\n`;
+                    debugText += `  - 花色颜色: ${window.getComputedStyle(suitEl).color}\n`;
+                    debugText += `  - 花色字体大小: ${window.getComputedStyle(suitEl).fontSize}\n`;
+                }
+                
+                if (rankEl) {
+                    debugText += `  - 数字内容: "${rankEl.textContent}"\n`;
+                    debugText += `  - 数字颜色: ${window.getComputedStyle(rankEl).color}\n`;
+                    debugText += `  - 数字字体大小: ${window.getComputedStyle(rankEl).fontSize}\n`;
+                }
+                
+                debugText += '\n';
+            });
+            
+            debugInfo.textContent = debugText;
+            
+            // 额外检查 - 检查是否被CSS隐藏
+            const firstCard = container.querySelector('.card');
+            if (firstCard) {
+                const suitEl = firstCard.querySelector('.card-suit');
+                const rankEl = firstCard.querySelector('.card-rank');
+                
+                if (suitEl) {
+                    console.log('花色元素计算样式:', window.getComputedStyle(suitEl));
+                }
+                if (rankEl) {
+                    console.log('数字元素计算样式:', window.getComputedStyle(rankEl));
+                }
+            }
+        }
+        
+        // 页面加载完成后运行测试
+        document.addEventListener('DOMContentLoaded', runTest);
+    </script>
+</body>
+</html>

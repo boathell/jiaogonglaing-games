@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>卡片显示测试</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .test-container {
+            padding: 20px;
+            background: #f0f0f0;
+            margin: 20px;
+            border-radius: 10px;
+        }
+        .debug-info {
+            background: yellow;
+            padding: 10px;
+            margin: 10px 0;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h2>玩家卡片测试</h2>
+        <div class="debug-info" id="debug-info">等待测试...</div>
+        
+        <!-- 模拟玩家区域 -->
+        <div class="player-area human-player" id="player-0">
+            <div class="player-info">
+                <span class="player-name">测试玩家</span>
+                <span class="card-count">3 张牌</span>
+            </div>
+            <div class="player-cards" id="test-player-cards">
+                <!-- 这里将动态添加卡片 -->
+            </div>
+        </div>
+        
+        <!-- 模拟电脑玩家区域 -->
+        <div class="player-area computer-player" id="player-1">
+            <div class="player-info">
+                <span class="player-name">电脑玩家</span>
+                <span class="card-count">3 张牌</span>
+            </div>
+            <div class="player-cards" id="test-computer-cards">
+                <!-- 这里将动态添加卡片 -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 模拟卡片数据
+        const testCards = [
+            { suit: 'hearts', rank: '7' },
+            { suit: 'spades', rank: 'K' },
+            { suit: 'diamonds', rank: 'A' }
+        ];
+        
+        function createTestCard(card, isHuman) {
+            const cardElement = document.createElement('div');
+            cardElement.className = 'card';
+            cardElement.dataset.suit = card.suit;
+            cardElement.dataset.rank = card.rank;
+            
+            if (isHuman) {
+                // 人类玩家显示实际牌面
+                const suitElement = document.createElement('div');
+                suitElement.className = 'card-suit';
+                suitElement.textContent = getSuitSymbol(card.suit);
+                
+                const rankElement = document.createElement('div');
+                rankElement.className = 'card-rank';
+                rankElement.textContent = getRankText(card.rank);
+                
+                cardElement.appendChild(suitElement);
+                cardElement.appendChild(rankElement);
+            } else {
+                // 电脑玩家显示背面
+                cardElement.style.background = 'linear-gradient(45deg, #8B4513, #A0522D)';
+                cardElement.innerHTML = '🂠';
+                cardElement.style.fontSize = '40px';
+                cardElement.style.color = 'rgba(255,255,255,0.8)';
+            }
+            
+            return cardElement;
+        }
+        
+        function getSuitSymbol(suit) {
+            switch (suit) {
+                case 'hearts': return '♥';
+                case 'diamonds': return '♦';
+                case 'clubs': return '♣';
+                case 'spades': return '♠';
+                default: return '';
+            }
+        }
+        
+        function getRankText(rank) {
+            switch (rank) {
+                case '1': return 'A';
+                case '11': return 'J';
+                case '12': return 'Q';
+                case '13': return 'K';
+                default: return rank;
+            }
+        }
+        
+        function runTest() {
+            const debugInfo = document.getElementById('debug-info');
+            const playerCardsContainer = document.getElementById('test-player-cards');
+            const computerCardsContainer = document.getElementById('test-computer-cards');
+            
+            debugInfo.innerHTML = '开始测试卡片显示...<br>';
+            
+            // 清空容器
+            playerCardsContainer.innerHTML = '';
+            computerCardsContainer.innerHTML = '';
+            
+            // 添加玩家卡片
+            testCards.forEach((card, index) => {
+                const cardElement = createTestCard(card, true);
+                playerCardsContainer.appendChild(cardElement);
+                
+                // 检查创建的卡片内容
+                const suitElement = cardElement.querySelector('.card-suit');
+                const rankElement = cardElement.querySelector('.card-rank');
+                
+                debugInfo.innerHTML += `玩家卡片 ${index + 1}: ${card.suit} ${card.rank}<br>`;
+                debugInfo.innerHTML += `  - 花色元素存在: ${!!suitElement}<br>`;
+                debugInfo.innerHTML += `  - 数字元素存在: ${!!rankElement}<br>`;
+                if (suitElement) {
+                    debugInfo.innerHTML += `  - 花色内容: "${suitElement.textContent}"<br>`;
+                }
+                if (rankElement) {
+                    debugInfo.innerHTML += `  - 数字内容: "${rankElement.textContent}"<br>`;
+                }
+            });
+            
+            // 添加电脑卡片
+            testCards.forEach((card, index) => {
+                const cardElement = createTestCard(card, false);
+                computerCardsContainer.appendChild(cardElement);
+                
+                debugInfo.innerHTML += `电脑卡片 ${index + 1}: 背面显示<br>`;
+            });
+            
+            debugInfo.innerHTML += '测试完成！';
+        }
+        
+        // 页面加载完成后运行测试
+        document.addEventListener('DOMContentLoaded', runTest);
+    </script>
+</body>
+</html>

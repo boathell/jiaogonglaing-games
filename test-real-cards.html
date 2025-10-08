@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实际卡片显示测试</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            padding: 20px;
+            background: #2c8d51;
+        }
+        .test-section {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+        .card-debug {
+            border: 3px solid red;
+            margin: 10px;
+        }
+        .test-result {
+            background: yellow;
+            padding: 10px;
+            margin: 10px 0;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>实际卡片显示测试</h1>
+    
+    <div class="test-section">
+        <h3>测试1: 手动创建卡片元素</h3>
+        <div id="manual-test"></div>
+        <div id="manual-result" class="test-result">等待测试...</div>
+    </div>
+    
+    <div class="test-section">
+        <h3>测试2: 使用UIManager逻辑创建卡片</h3>
+        <div id="ui-test"></div>
+        <div id="ui-result" class="test-result">等待测试...</div>
+    </div>
+    
+    <div class="test-section">
+        <h3>测试3: 检查CSS应用情况</h3>
+        <div id="css-test"></div>
+        <div id="css-result" class="test-result">等待测试...</div>
+    </div>
+
+    <script>
+        // 测试1: 手动创建卡片元素
+        function test1() {
+            const container = document.getElementById('manual-test');
+            const result = document.getElementById('manual-result');
+            
+            // 创建卡片元素
+            const cardElement = document.createElement('div');
+            cardElement.className = 'card';
+            cardElement.dataset.suit = 'hearts';
+            cardElement.dataset.rank = '7';
+            
+            // 添加花色和数字
+            const suitElement = document.createElement('div');
+            suitElement.className = 'card-suit';
+            suitElement.textContent = '♥';
+            
+            const rankElement = document.createElement('div');
+            rankElement.className = 'card-rank';
+            rankElement.textContent = '7';
+            
+            cardElement.appendChild(suitElement);
+            cardElement.appendChild(rankElement);
+            
+            container.appendChild(cardElement);
+            
+            // 检查结果
+            const createdSuit = cardElement.querySelector('.card-suit');
+            const createdRank = cardElement.querySelector('.card-rank');
+            
+            result.innerHTML = `<h4>手动创建结果:</h4>
+                卡片元素创建: ✓<br>
+                花色元素存在: ${!!createdSuit}<br>
+                数字元素存在: ${!!createdRank}<br>
+                花色内容: "${createdSuit ? createdSuit.textContent : '无'}"<br>
+                数字内容: "${createdRank ? createdRank.textContent : '无'}"<br>
+                卡片类名: ${cardElement.className}<br>
+                卡片data属性: suit=${cardElement.dataset.suit}, rank=${cardElement.dataset.rank}<br>
+                子元素数量: ${cardElement.children.length}<br>
+                 innerHTML: ${cardElement.innerHTML}<br>
+            `;
+        }
+        
+        // 测试2: 使用UIManager逻辑创建卡片
+        function test2() {
+            const container = document.getElementById('ui-test');
+            const result = document.getElementById('ui-result');
+            
+            // 模拟UIManager的createCardElement逻辑
+            function createCardElement(card, isHuman) {
+                const cardElement = document.createElement('div');
+                cardElement.className = 'card';
+                cardElement.dataset.suit = card.suit;
+                cardElement.dataset.rank = card.rank;
+                
+                if (isHuman) {
+                    // 人类玩家显示实际牌面
+                    const suitElement = document.createElement('div');
+                    suitElement.className = 'card-suit';
+                    suitElement.textContent = getSuitSymbol(card.suit);
+                    
+                    const rankElement = document.createElement('div');
+                    rankElement.className = 'card-rank';
+                    rankElement.textContent = getRankText(card.rank);
+                    
+                    cardElement.appendChild(suitElement);
+                    cardElement.appendChild(rankElement);
+                } else {
+                    // 电脑玩家显示背面
+                    cardElement.style.background = 'linear-gradient(45deg, #8B4513, #A0522D)';
+                    cardElement.innerHTML = '🂠';
+                    cardElement.style.fontSize = '40px';
+                    cardElement.style.color = 'rgba(255,255,255,0.8)';
+                }
+                
+                return cardElement;
+            }
+            
+            function getSuitSymbol(suit) {
+                switch (suit) {
+                    case 'hearts': return '♥';
+                    case 'diamonds': return '♦';
+                    case 'clubs': return '♣';
+                    case 'spades': return '♠';
+                    default: return '';
+                }
+            }
+            
+            function getRankText(rank) {
+                switch (rank) {
+                    case '1': return 'A';
+                    case '11': return 'J';
+                    case '12': return 'Q';
+                    case '13': return 'K';
+                    default: return rank;
+                }
+            }
+            
+            // 创建测试卡片
+            const testCard = { suit: 'spades', rank: 'K' };
+            const cardElement = createCardElement(testCard, true);
+            
+            container.appendChild(cardElement);
+            
+            // 检查结果
+            const createdSuit = cardElement.querySelector('.card-suit');
+            const createdRank = cardElement.querySelector('.card-rank');
+            
+            result.innerHTML = `<h4>UIManager逻辑创建结果:</h4>
+                卡片元素创建: ✓<br>
+                花色元素存在: ${!!createdSuit}<br>
+                数字元素存在: ${!!createdRank}<br>
+                花色内容: "${createdSuit ? createdSuit.textContent : '无'}"<br>
+                数字内容: "${createdRank ? createdRank.textContent : '无'}"<br>
+                卡片类名: ${cardElement.className}<br>
+                卡片样式: ${cardElement.style.cssText}<br>
+                innerHTML: ${cardElement.innerHTML}<br>
+            `;
+        }
+        
+        // 测试3: 检查CSS应用情况
+        function test3() {
+            const container = document.getElementById('css-test');
+            const result = document.getElementById('css-result');
+            
+            // 创建一个卡片并检查应用样式
+            const cardElement = document.createElement('div');
+            cardElement.className = 'card';
+            cardElement.dataset.suit = 'diamonds';
+            cardElement.dataset.rank = 'A';
+            
+            const suitElement = document.createElement('div');
+            suitElement.className = 'card-suit';
+            suitElement.textContent = '♦';
+            
+            const rankElement = document.createElement('div');
+            rankElement.className = 'card-rank';
+            rankElement.textContent = 'A';
+            
+            cardElement.appendChild(suitElement);
+            cardElement.appendChild(rankElement);
+            
+            container.appendChild(cardElement);
+            
+            // 检查计算样式
+            const computedCard = window.getComputedStyle(cardElement);
+            const computedSuit = window.getComputedStyle(suitElement);
+            const computedRank = window.getComputedStyle(rankElement);
+            
+            result.innerHTML = `<h4>CSS应用情况:</h4>
+                <strong>卡片元素:</strong><br>
+                display: ${computedCard.display}<br>
+                flex-direction: ${computedCard.flexDirection}<br>
+                justify-content: ${computedCard.justifyContent}<br>
+                align-items: ${computedCard.alignItems}<br>
+                color: ${computedCard.color}<br>
+                <strong>花色元素:</strong><br>
+                display: ${computedSuit.display}<br>
+                font-size: ${computedSuit.fontSize}<br>
+                color: ${computedSuit.color}<br>
+                visibility: ${computedSuit.visibility}<br>
+                <strong>数字元素:</strong><br>
+                display: ${computedRank.display}<br>
+                font-size: ${computedRank.fontSize}<br>
+                color: ${computedRank.color}<br>
+                visibility: ${computedRank.visibility}<br>
+            `;
+        }
+        
+        // 页面加载完成后运行所有测试
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('开始运行卡片显示测试...');
+            test1();
+            test2();
+            test3();
+            console.log('测试完成！');
+        });
+    </script>
+</body>
+</html>

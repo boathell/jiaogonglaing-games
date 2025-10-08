@@ -151,6 +151,9 @@ body {
     flex-shrink: 0;
     position: relative;
     border: 2px solid #ddd;
+    color: #000; /* 默认文字颜色 - 使用黑色确保可见 */
+    font-family: Arial, sans-serif; /* 确保字体支持符号 */
+    overflow: hidden; /* 防止内容溢出 */
 }
 
 .card:hover {
@@ -168,14 +171,28 @@ body {
 
 /* 卡片内容 */
 .card-suit {
-    font-size: 28px;
-    margin-bottom: 5px;
+    font-size: 24px;
+    margin-bottom: 2px;
     font-weight: bold;
+    color: inherit; /* 确保继承卡片颜色 */
+    text-align: center;
+    line-height: 1;
+    display: block;
+    visibility: visible;
+    width: 100%;
+    height: auto;
 }
 
 .card-rank {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
+    color: inherit; /* 确保继承卡片颜色 */
+    text-align: center;
+    line-height: 1;
+    display: block;
+    visibility: visible;
+    width: 100%;
+    height: auto;
 }
 
 /* 红色花色 */
@@ -191,7 +208,7 @@ body {
 .card[data-suit="clubs"] .card-suit,
 .card[data-suit="spades"] .card-rank,
 .card[data-suit="clubs"] .card-rank {
-    color: #333;
+    color: #000;
 }
 
 /* 电脑玩家卡片 - 背面显示 */

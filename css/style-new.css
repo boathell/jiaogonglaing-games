@@ -151,6 +151,9 @@ body {
     flex-shrink: 0;
     position: relative;
     border: 2px solid #ddd;
+    color: #000; /* 默认文字颜色 - 使用黑色确保可见 */
+    font-family: Arial, sans-serif; /* 确保字体支持符号 */
+    overflow: hidden; /* 防止内容溢出 */
 }
 
 .card:hover {
@@ -171,11 +174,25 @@ body {
     font-size: 28px;
     margin-bottom: 5px;
     font-weight: bold;
+    color: inherit; /* 确保继承卡片颜色 */
+    text-align: center;
+    line-height: 1;
+    display: block;
+    visibility: visible;
+    width: 100%;
+    height: auto;
 }
 
 .card-rank {
     font-size: 18px;
     font-weight: bold;
+    color: inherit; /* 确保继承卡片颜色 */
+    text-align: center;
+    line-height: 1;
+    display: block;
+    visibility: visible;
+    width: 100%;
+    height: auto;
 }
 
 /* 红色花色 */
