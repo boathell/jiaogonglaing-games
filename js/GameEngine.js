@@ -35,10 +35,15 @@ class GameEngine {
         this.gameState.initPlayers(players);
         
         // 订阅事件
+        console.log('GameEngine正在订阅事件...');
         this.eventBus.on('play-cards', this.handlePlayerPlay.bind(this));
+        console.log('已订阅play-cards事件');
         this.eventBus.on('pass', this.handlePlayerPass.bind(this));
+        console.log('已订阅pass事件');
         this.eventBus.on('new-game', this.startNewGame.bind(this));
+        console.log('已订阅new-game事件');
         this.eventBus.on('next-round', this.startNextRound.bind(this));
+        console.log('已订阅next-round事件');
     }
 
     /**
@@ -342,19 +347,54 @@ class GameEngine {
         const currentPlayer = this.gameState.getCurrentPlayer();
         console.log(`当前玩家: ${currentPlayer.name}, 是否人类: ${currentPlayer.isHuman}, 游戏阶段: ${this.gameState.phase}`);
         
+        // 添加更详细的调试信息
+        if (!currentPlayer) {
+            console.error('❌ 严重错误: currentPlayer 为 null');
+            return;
+        }
+        
+        if (!this.gameState) {
+            console.error('❌ 严重错误: gameState 为 null');
+            return;
+        }
+        
+        if (!this.aiManager) {
+            console.error('❌ 严重错误: aiManager 为 null');
+            return;
+        }
+        
+        console.log(`🔍 检查AI出牌条件:`);
+        console.log(`   - 玩家类型: ${currentPlayer.isHuman ? '人类' : 'AI'}`);
+        console.log(`   - 游戏阶段: ${this.gameState.phase}`);
+        console.log(`   - AI管理器状态: ${this.aiManager ? '已初始化' : '未初始化'}`);
+        
         if (!currentPlayer.isHuman && this.gameState.phase === 'PLAYING') {
-            console.log(`触发AI玩家 ${currentPlayer.name} 出牌`);
+            console.log(`✅ 条件满足，触发AI玩家 ${currentPlayer.name} 出牌`);
             // 延迟一段时间，模拟AI思考
             setTimeout(() => {
-                console.log(`AI玩家 ${currentPlayer.name} 开始决策...`);
-                this.aiManager.makeDecision(
-                    currentPlayer,
-                    this.gameState,
-                    this.cardManager
-                );
+                console.log(`🤖 AI玩家 ${currentPlayer.name} 开始决策...`);
+                console.log(`   - 手牌数量: ${currentPlayer.cards.length}`);
+                console.log(`   - 是否有上一次有效出牌: ${!!this.gameState.lastValidPlay}`);
+                
+                try {
+                    this.aiManager.makeDecision(
+                        currentPlayer,
+                        this.gameState,
+                        this.cardManager
+                    );
+                    console.log(`✅ AI决策调用完成`);
+                } catch (error) {
+                    console.error(`❌ AI决策过程出错:`, error);
+                }
             }, 1000);
         } else {
-            console.log('不满足AI出牌条件，跳过');
+            console.log('⚠️ 不满足AI出牌条件，跳过');
+            if (currentPlayer.isHuman) {
+                console.log('   - 原因: 当前是人类玩家回合');
+            }
+            if (this.gameState.phase !== 'PLAYING') {
+                console.log(`   - 原因: 游戏阶段不是PLAYING，当前为 ${this.gameState.phase}`);
+            }
         }
     }
 }

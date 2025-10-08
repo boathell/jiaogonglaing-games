@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>调试日志收集器</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            max-width: 1200px; 
+            margin: 20px auto; 
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container { 
+            background: white; 
+            padding: 20px; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 { color: #333; text-align: center; }
+        .log-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fafafa;
+        }
+        .console-output {
+            background-color: #1e1e1e;
+            color: #ffffff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            max-height: 400px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            line-height: 1.4;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .error { color: #ff6b6b; }
+        .warning { color: #ffd93d; }
+        .info { color: #6bcf7f; }
+        .debug { color: #a8a8a8; }
+        .controls {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .status {
+            text-align: center;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            background-color: #e3f2fd;
+            color: #1976d2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 游戏调试日志收集器</h1>
+        <p style="text-align: center; color: #666;">请按照以下步骤收集调试信息：</p>
+        
+        <div class="log-section">
+            <h3>📋 使用说明</h3>
+            <ol>
+                <li><strong>打开游戏页面</strong> (index.html)</li>
+                <li><strong>打开浏览器控制台</strong> (F12 → Console)</li>
+                <li><strong>进行游戏</strong> 直到出现AI卡住的情况</li>
+                <li><strong>复制控制台日志</strong> (全选控制台内容并复制)</li>
+                <li><strong>粘贴到下方输入框</strong></li>
+                <li><strong>点击分析日志</strong>按钮</li>
+            </ol>
+        </div>
+        
+        <div class="controls">
+            <textarea id="logInput" placeholder="请在此处粘贴浏览器控制台日志..." rows="6" style="width: 80%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-family: monospace;"></textarea>
+            <br><br>
+            <button onclick="analyzeLog()">🔍 分析日志</button>
+            <button onclick="clearLog()">🗑️ 清空</button>
+            <button onclick="loadSampleLog()">📄 加载示例</button>
+        </div>
+        
+        <div class="log-section">
+            <h3>📊 日志分析结果</h3>
+            <div id="analysisResult" class="status" style="display: none;"></div>
+            <div id="parsedLog" class="console-output" style="min-height: 200px;">
+                等待日志分析...
+            </div>
+        </div>
+        
+        <div class="log-section">
+            <h3>💡 常见问题提示</h3>
+            <ul>
+                <li><strong>AI不响应：</strong> 检查是否有"触发AI玩家"相关日志</li>
+                <li><strong>回合不切换：</strong> 检查"切换到下一个玩家"日志</li>
+                <li><strong>事件未触发：</strong> 检查"EventBus.emit"相关日志</li>
+                <li><strong>AI决策错误：</strong> 检查"AI决策"相关日志</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        let originalLog = '';
+        
+        function clearLog() {
+            document.getElementById('logInput').value = '';
+            document.getElementById('parsedLog').textContent = '等待日志分析...';
+            document.getElementById('analysisResult').style.display = 'none';
+        }
+        
+        function loadSampleLog() {
+            const sampleLog = `GameEngine.startNewGame 开始
+main-new.js:10 DOM加载完成 - 开始初始化游戏
+main-new.js:12 事件总线创建成功
+main-new.js:15 游戏引擎创建成功
+main-new.js:19 UI管理器创建成功
+main-new.js:23 AI管理器创建成功
+main-new.js:27 AI管理器初始化完成
+main-new.js:30 UI管理器初始化完成
+main-new.js:33 游戏引擎初始化完成
+main-new.js:43 新游戏按钮事件绑定成功
+main-new.js:49 准备开始新游戏...
+GameEngine.js:48 GameEngine.startNewGame 开始
+GameEngine.js:61 随机选择的起始玩家索引: 0
+GameEngine.js:67 发出game-started事件
+EventBus.js:43 EventBus.emit: 事件 "game-started" 被触发
+EventBus.js:48 EventBus.emit: 事件 "game-started" 有 1 个订阅者
+EventBus.js:50 EventBus.emit: 执行订阅者 1
+GameEngine.js:74 游戏开始，检查是否需要触发AI
+GameEngine.js:320 GameEngine.checkAndTriggerAIPlay 被调用
+GameEngine.js:322 当前玩家: 玩家, 是否人类: true, 游戏阶段: PLAYING
+GameEngine.js:336 不满足AI出牌条件，跳过
+GameEngine.js:77 GameEngine.startNewGame 完成
+main-new.js:52 新游戏已开始
+main-new.js:55 游戏初始化全部完成`;
+            
+            document.getElementById('logInput').value = sampleLog;
+            analyzeLog();
+        }
+        
+        function analyzeLog() {
+            const logInput = document.getElementById('logInput').value.trim();
+            if (!logInput) {
+                alert('请先粘贴控制台日志！');
+                return;
+            }
+            
+            originalLog = logInput;
+            const lines = logInput.split('\n');
+            const analysis = {
+                aiTriggers: [],
+                turnChanges: [],
+                events: [],
+                errors: [],
+                warnings: []
+            };
+            
+            let parsedHtml = '';
+            
+            lines.forEach(line => {
+                const trimmedLine = line.trim();
+                if (!trimmedLine) return;
+                
+                // 分类不同的日志
+                if (trimmedLine.includes('AI决策')) {
+                    analysis.aiTriggers.push(trimmedLine);
+                    parsedHtml += `<span class="info">${escapeHtml(trimmedLine)}</span>\n`;
+                } 
+                else if (trimmedLine.includes('checkAndTriggerAIPlay') || trimmedLine.includes('触发AI')) {
+                    analysis.aiTriggers.push(trimmedLine);
+                    parsedHtml += `<span class="info">${escapeHtml(trimmedLine)}</span>\n`;
+                }
+                else if (trimmedLine.includes('切换到下一个玩家') || trimmedLine.includes('turn-changed')) {
+                    analysis.turnChanges.push(trimmedLine);
+                    parsedHtml += `<span class="warning">${escapeHtml(trimmedLine)}</span>\n`;
+                }
+                else if (trimmedLine.includes('EventBus.emit')) {
+                    analysis.events.push(trimmedLine);
+                    parsedHtml += `<span class="debug">${escapeHtml(trimmedLine)}</span>\n`;
+                }
+                else if (trimmedLine.includes('错误') || trimmedLine.includes('error') || trimmedLine.includes('Error')) {
+                    analysis.errors.push(trimmedLine);
+                    parsedHtml += `<span class="error">${escapeHtml(trimmedLine)}</span>\n`;
+                }
+                else if (trimmedLine.includes('警告') || trimmedLine.includes('warning')) {
+                    analysis.warnings.push(trimmedLine);
+                    parsedHtml += `<span class="warning">${escapeHtml(trimmedLine)}</span>\n`;
+                }
+                else {
+                    parsedHtml += `${escapeHtml(trimmedLine)}\n`;
+                }
+            });
+            
+            // 显示分析结果
+            document.getElementById('parsedLog').innerHTML = parsedHtml;
+            
+            // 生成分析报告
+            let analysisResult = `<strong>📊 日志分析完成</strong><br><br>`;
+            
+            if (analysis.aiTriggers.length === 0) {
+                analysisResult += `<span class="error">❌ 未发现AI触发日志 - 这是主要问题！</span><br>`;
+            } else {
+                analysisResult += `<span class="info">✅ 发现 ${analysis.aiTriggers.length} 条AI相关日志</span><br>`;
+            }
+            
+            if (analysis.turnChanges.length === 0) {
+                analysisResult += `<span class="error">❌ 未发现回合切换日志 - 可能回合未正确切换！</span><br>`;
+            } else {
+                analysisResult += `<span class="info">✅ 发现 ${analysis.turnChanges.length} 条回合切换日志</span><br>`;
+            }
+            
+            if (analysis.events.length === 0) {
+                analysisResult += `<span class="warning">⚠️  未发现事件日志 - 事件系统可能未工作！</span><br>`;
+            } else {
+                analysisResult += `<span class="info">✅ 发现 ${analysis.events.length} 条事件日志</span><br>`;
+            }
+            
+            if (analysis.errors.length > 0) {
+                analysisResult += `<span class="error">⚠️  发现 ${analysis.errors.length} 条错误日志</span><br>`;
+            }
+            
+            const resultDiv = document.getElementById('analysisResult');
+            resultDiv.innerHTML = analysisResult;
+            resultDiv.style.display = 'block';
+            
+            // 滚动到分析结果
+            resultDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    </script>
+</body>
+</html>
