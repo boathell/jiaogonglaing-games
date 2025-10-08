@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI修复测试</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            max-width: 800px; 
+            margin: 20px auto; 
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container { 
+            background: white; 
+            padding: 20px; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 { color: #333; text-align: center; }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fafafa;
+        }
+        .console-output {
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .success { color: green; font-weight: bold; }
+        .error { color: red; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AI修复测试</h1>
+        <p>测试电脑玩家出牌异常修复效果</p>
+        
+        <div class="test-section">
+            <h3>测试1: AI决策流程测试</h3>
+            <p>模拟AI玩家在没有上一次有效出牌时的决策过程</p>
+            <button onclick="testAIDecision()">开始测试</button>
+            <div id="test1-result"></div>
+        </div>
+        
+        <div class="test-section">
+            <h3>测试2: 游戏流程测试</h3>
+            <p>模拟完整游戏流程，测试AI是否能正常出牌</p>
+            <button onclick="testGameFlow()">开始测试</button>
+            <div id="test2-result"></div>
+        </div>
+        
+        <div class="test-section">
+            <h3>控制台输出</h3>
+            <div id="console" class="console-output"></div>
+        </div>
+    </div>
+
+    <script src="js/models/Card.js"></script>
+    <script src="js/models/Player.js"></script>
+    <script src="js/models/GameState.js"></script>
+    <script src="js/EventBus.js"></script>
+    <script src="js/CardManager.js"></script>
+    <script src="js/AIManager.js"></script>
+    
+    <script>
+        // 重定向console.log到页面显示
+        const consoleDiv = document.getElementById('console');
+        const originalLog = console.log;
+        console.log = function(...args) {
+            const message = args.join(' ');
+            originalLog.apply(console, args);
+            consoleDiv.textContent += message + '\n';
+            consoleDiv.scrollTop = consoleDiv.scrollHeight;
+        };
+        
+        function clearConsole() {
+            consoleDiv.textContent = '';
+        }
+        
+        function showResult(testId, message, isSuccess) {
+            const resultDiv = document.getElementById(testId);
+            resultDiv.innerHTML = `<span class="${isSuccess ? 'success' : 'error'}">${message}</span>`;
+        }
+        
+        function testAIDecision() {
+            clearConsole();
+            console.log('=== AI决策流程测试开始 ===');
+            
+            try {
+                // 创建事件总线
+                const eventBus = new EventBus();
+                
+                // 创建AI管理器
+                const aiManager = new AIManager();
+                aiManager.init(eventBus);
+                
+                // 创建玩家
+                const aiPlayer = new Player('1', '电脑玩家1', false);
+                
+                // 给玩家一些牌
+                aiPlayer.addCard(new Card('spade', '3', 1));
+                aiPlayer.addCard(new Card('heart', '4', 2));
+                aiPlayer.addCard(new Card('club', '5', 3));
+                aiPlayer.addCard(new Card('diamond', '5', 3)); // 对子
+                aiPlayer.addCard(new Card('spade', '6', 4));
+                aiPlayer.addCard(new Card('heart', '6', 4)); // 对子
+                aiPlayer.addCard(new Card('club', '7', 5));
+                aiPlayer.addCard(new Card('diamond', '7', 5)); // 对子
+                aiPlayer.addCard(new Card('spade', '8', 6));
+                
+                // 创建游戏状态
+                const gameState = new GameState();
+                gameState.lastValidPlay = null; // 没有上一次有效出牌
+                
+                // 创建卡牌管理器
+                const cardManager = new CardManager();
+                
+                // 监听AI决策事件
+                let aiDecisionMade = false;
+                let aiDecisionType = '';
+                
+                eventBus.on('play-cards', (data) => {
+                    aiDecisionMade = true;
+                    aiDecisionType = '出牌';
+                    console.log(`AI决策事件触发: ${data.player.name} 出了 ${data.cards.length} 张牌`);
+                });
+                
+                eventBus.on('pass', (data) => {
+                    aiDecisionMade = true;
+                    aiDecisionType = '不出';
+                    console.log(`AI决策事件触发: ${data.player.name} 选择不出`);
+                });
+                
+                // 执行AI决策
+                console.log('开始执行AI决策...');
+                aiManager.makeDecision(aiPlayer, gameState, cardManager);
+                
+                // 等待一段时间让AI决策完成
+                setTimeout(() => {
+                    if (aiDecisionMade) {
+                        showResult('test1-result', `✅ 测试通过！AI做出了决策: ${aiDecisionType}`, true);
+                        console.log('=== AI决策流程测试完成 ===');
+                    } else {
+                        showResult('test1-result', '❌ 测试失败！AI没有做出任何决策', false);
+                        console.log('=== AI决策流程测试失败 ===');
+                    }
+                }, 100);
+                
+            } catch (error) {
+                showResult('test1-result', `❌ 测试出错: ${error.message}`, false);
+                console.error('测试出错:', error);
+            }
+        }
+        
+        function testGameFlow() {
+            clearConsole();
+            console.log('=== 游戏流程测试开始 ===');
+            
+            try {
+                // 创建事件总线
+                const eventBus = new EventBus();
+                
+                // 创建游戏引擎
+                const gameEngine = new GameEngine();
+                const uiManager = { 
+                    init: () => {}, 
+                    updateCards: () => {},
+                    updateCurrentPlayer: () => {}
+                };
+                const aiManager = new AIManager();
+                
+                gameEngine.init(uiManager, aiManager, eventBus);
+                aiManager.init(eventBus);
+                
+                // 监听游戏事件
+                let gameStarted = false;
+                let aiPlayed = false;
+                
+                eventBus.on('game-started', () => {
+                    gameStarted = true;
+                    console.log('游戏开始事件触发');
+                });
+                
+                eventBus.on('cards-played', (data) => {
+                    if (!data.player.isHuman) {
+                        aiPlayed = true;
+                        console.log(`AI出牌事件触发: ${data.player.name} 出了 ${data.cards.length} 张牌`);
+                    }
+                });
+                
+                eventBus.on('player-passed', (data) => {
+                    if (!data.player.isHuman) {
+                        aiPlayed = true;
+                        console.log(`AI不出事件触发: ${data.player.name} 选择不出`);
+                    }
+                });
+                
+                // 开始新游戏
+                console.log('开始新游戏...');
+                gameEngine.startNewGame();
+                
+                // 等待一段时间让游戏流程执行
+                setTimeout(() => {
+                    if (gameStarted && aiPlayed) {
+                        showResult('test2-result', '✅ 测试通过！AI在游戏流程中正常做出了决策', true);
+                        console.log('=== 游戏流程测试完成 ===');
+                    } else {
+                        showResult('test2-result', `❌ 测试失败！游戏开始: ${gameStarted}, AI决策: ${aiPlayed}`, false);
+                        console.log('=== 游戏流程测试失败 ===');
+                    }
+                }, 1500);
+                
+            } catch (error) {
+                showResult('test2-result', `❌ 测试出错: ${error.message}`, false);
+                console.error('测试出错:', error);
+            }
+        }
+    </script>
+</body>
+</html>
