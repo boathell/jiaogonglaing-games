@@ -40,10 +40,14 @@ class EventBus {
      * @param {Object} data - 事件数据
      */
     emit(eventName, data) {
+        console.log(`EventBus.emit: 事件 "${eventName}" 被触发`);
         if (!this.events[eventName]) {
+            console.log(`EventBus.emit: 事件 "${eventName}" 没有订阅者`);
             return;
         }
-        this.events[eventName].forEach(callback => {
+        console.log(`EventBus.emit: 事件 "${eventName}" 有 ${this.events[eventName].length} 个订阅者`);
+        this.events[eventName].forEach((callback, index) => {
+            console.log(`EventBus.emit: 执行订阅者 ${index + 1}`);
             callback(data);
         });
     }

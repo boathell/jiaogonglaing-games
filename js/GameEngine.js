@@ -45,6 +45,7 @@ class GameEngine {
      * 开始新游戏
      */
     startNewGame() {
+        console.log('GameEngine.startNewGame 开始');
         // 重置游戏状态
         this.gameState.reset();
         
@@ -57,18 +58,23 @@ class GameEngine {
         
         // 随机决定第一个出牌的玩家
         this.gameState.currentPlayerIndex = Math.floor(Math.random() * 3);
+        console.log(`随机选择的起始玩家索引: ${this.gameState.currentPlayerIndex}`);
         
         // 设置游戏阶段为PLAYING
         this.gameState.setPhase('PLAYING');
         
         // 通知UI更新
+        console.log('发出game-started事件');
         this.eventBus.emit('game-started', {
             players: this.gameState.players,
             currentPlayerIndex: this.gameState.currentPlayerIndex
         });
         
         // 如果当前玩家是AI，则让AI出牌
+        console.log('游戏开始，检查是否需要触发AI');
         this.checkAndTriggerAIPlay();
+        
+        console.log('GameEngine.startNewGame 完成');
     }
 
     /**
@@ -119,10 +125,13 @@ class GameEngine {
      * @param {Card[]} data.cards - 出的牌
      */
     handlePlayerPlay(data) {
+        console.log(`GameEngine.handlePlayerPlay 被调用 - 玩家: ${data.player.name}`);
         const { player, cards } = data;
         
         // 检查是否轮到该玩家出牌
-        if (player !== this.gameState.getCurrentPlayer()) {
+        const currentPlayer = this.gameState.getCurrentPlayer();
+        console.log(`当前玩家: ${currentPlayer.name}, 请求出牌玩家: ${player.name}`);
+        if (player !== currentPlayer) {
             console.error('不是该玩家的回合');
             return;
         }
@@ -157,16 +166,22 @@ class GameEngine {
         }
         
         // 切换到下一个玩家
+        console.log(`切换到下一个玩家 - 之前玩家索引: ${this.gameState.currentPlayerIndex}`);
         this.gameState.nextPlayer();
+        console.log(`切换到下一个玩家 - 之后玩家索引: ${this.gameState.currentPlayerIndex}`);
         
         // 通知UI更新当前玩家
+        console.log('发出turn-changed事件');
         this.eventBus.emit('turn-changed', {
             currentPlayerIndex: this.gameState.currentPlayerIndex,
             currentPlayer: this.gameState.getCurrentPlayer()
         });
         
         // 如果当前玩家是AI，则让AI出牌
+        console.log('准备调用checkAndTriggerAIPlay');
         this.checkAndTriggerAIPlay();
+        
+        console.log('handlePlayerPlay 方法执行完成');
     }
 
     /**
@@ -175,10 +190,13 @@ class GameEngine {
      * @param {Player} data.player - 不出的玩家
      */
     handlePlayerPass(data) {
+        console.log(`GameEngine.handlePlayerPass 被调用 - 玩家: ${data.player.name}`);
         const { player } = data;
         
         // 检查是否轮到该玩家出牌
-        if (player !== this.gameState.getCurrentPlayer()) {
+        const currentPlayer = this.gameState.getCurrentPlayer();
+        console.log(`当前玩家: ${currentPlayer.name}, 请求不出玩家: ${player.name}`);
+        if (player !== currentPlayer) {
             console.error('不是该玩家的回合');
             return;
         }
@@ -220,7 +238,10 @@ class GameEngine {
         }
         
         // 如果当前玩家是AI，则让AI出牌
+        console.log('准备调用checkAndTriggerAIPlay');
         this.checkAndTriggerAIPlay();
+        
+        console.log('handlePlayerPass 方法执行完成');
     }
 
     /**
@@ -317,17 +338,23 @@ class GameEngine {
      * 检查并触发AI出牌
      */
     checkAndTriggerAIPlay() {
+        console.log('GameEngine.checkAndTriggerAIPlay 被调用');
         const currentPlayer = this.gameState.getCurrentPlayer();
+        console.log(`当前玩家: ${currentPlayer.name}, 是否人类: ${currentPlayer.isHuman}, 游戏阶段: ${this.gameState.phase}`);
         
         if (!currentPlayer.isHuman && this.gameState.phase === 'PLAYING') {
+            console.log(`触发AI玩家 ${currentPlayer.name} 出牌`);
             // 延迟一段时间，模拟AI思考
             setTimeout(() => {
+                console.log(`AI玩家 ${currentPlayer.name} 开始决策...`);
                 this.aiManager.makeDecision(
                     currentPlayer,
                     this.gameState,
                     this.cardManager
                 );
             }, 1000);
+        } else {
+            console.log('不满足AI出牌条件，跳过');
         }
     }
 }
