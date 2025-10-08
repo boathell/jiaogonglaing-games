@@ -167,6 +167,10 @@ class CardManager {
      * @returns {string} - 牌型 (single, pair, triple, invalid)
      */
     getCardsType(cards) {
-        return this.identifyCardPattern(cards);
+        console.log(`CardManager.getCardsType() 被调用，cards数量: ${cards ? cards.length : 'null'}`);
+        console.log(`identifyCardPattern 方法是否存在: ${typeof this.identifyCardPattern}`);
+        const result = this.identifyCardPattern(cards);
+        console.log(`getCardsType 返回结果: ${result}`);
+        return result;
     }
 }
